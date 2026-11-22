@@ -221,3 +221,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Raw medical imaging dataset (do not upload to GitHub)
+data/raw/brain_tumor_dataset/*
+!data/raw/brain_tumor_dataset/README.md
