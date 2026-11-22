@@ -16,11 +16,21 @@
 - Glioma: 1,426 images
 - Pituitary Tumor: 930 images
 
+## Acquisition Details
+- Downloaded from the official Figshare Version 5 dataset.
+- Downloaded four ZIP archives containing 766 MATLAB files each.
+- Downloaded `cvind.mat` and the original `README.txt`.
+- Extracted all 3,064 `.mat` image files into this directory.
+- All 3,064 image files were verified after extraction.
+- Original ZIP archives were retained separately in the Downloads folder.
+- Acquisition Date: 22 November 2026.
+
 ## Raw Data Policy
 - Original dataset files must remain unchanged.
 - No resizing, normalization, augmentation, or preprocessing in this directory.
 - All transformations must be performed in data/interim or data/processed.
 - Raw dataset files should not be committed to Git without team approval.
+- The raw dataset is excluded from Git tracking through `.gitignore`.
 
 ## Important Note
 This dataset contains three tumor categories and does not contain a healthy/no-tumor class.
