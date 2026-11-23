@@ -221,3 +221,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Ignore downloaded MRI dataset files
+data/raw/brain_tumor_dataset/
