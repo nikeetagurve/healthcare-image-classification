@@ -222,5 +222,6 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Ignore downloaded MRI dataset files
-data/raw/brain_tumor_dataset/
+# Raw medical imaging dataset (do not upload to GitHub)
+data/raw/brain_tumor_dataset/*
+!data/raw/brain_tumor_dataset/README.md
