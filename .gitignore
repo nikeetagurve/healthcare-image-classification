@@ -225,3 +225,7 @@ __marimo__/
 # Raw medical imaging dataset (do not upload to GitHub)
 data/raw/brain_tumor_dataset/*
 !data/raw/brain_tumor_dataset/README.md
+
+# Generated processed medical images (do not upload to GitHub)
+data/processed/*
+!data/processed/.gitkeep
