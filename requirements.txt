@@ -1,2 +1,7 @@
 numpy==1.26.4
 h5py==3.16.0
+scikit-image==0.26.0
+scikit-learn==1.6.1
+tqdm==4.67.1
+scipy==1.15.3
+tifffile==2025.5.10

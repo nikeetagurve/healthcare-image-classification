@@ -47,6 +47,23 @@ def map_label(original_label):
 
     return LABEL_MAP[original_label]
 
+def decode_patient_id(pid_data):
+    """Decode MATLAB PID character array into a patient ID string."""
+
+    pid_values = np.asarray(pid_data).flatten()
+
+    try:
+        patient_id = "".join(
+            chr(int(value)) for value in pid_values
+        )
+    except (ValueError, TypeError, OverflowError) as error:
+        raise ValueError("Invalid patient ID format") from error
+
+    if not patient_id or not patient_id.isalnum():
+        raise ValueError(f"Invalid patient ID: {patient_id}")
+
+    return patient_id
+
 
 def load_mat_file(file_path):
     """Load and validate one MRI sample from a MATLAB v7.3 file."""
@@ -72,6 +89,7 @@ def load_mat_file(file_path):
             sample = data["cjdata"]
 
             required_fields = [
+                "PID",
                 "image",
                 "label",
                 "tumorMask"
@@ -92,6 +110,9 @@ def load_mat_file(file_path):
                 np.asarray(
                     sample["label"]
                 ).squeeze()
+            )
+            patient_id = decode_patient_id(
+                sample["PID"][:]
             )
 
             mask = np.asarray(
@@ -126,6 +147,7 @@ def load_mat_file(file_path):
 
     return {
         "image": image,
+        "patient_id": patient_id,
         "mask": mask,
         "label": label,
         "original_label": original_label,
@@ -168,6 +190,7 @@ def load_dataset(dataset_dir):
     labels = []
     valid_files = []
     errors = []
+    patient_ids = []
 
     for file in files:
 
@@ -178,6 +201,7 @@ def load_dataset(dataset_dir):
             masks.append(sample["mask"])
             labels.append(sample["label"])
             valid_files.append(file)
+            patient_ids.append(sample["patient_id"])
 
         except (ValueError, KeyError, OSError) as error:
             errors.append((file, str(error)))
@@ -191,6 +215,7 @@ def load_dataset(dataset_dir):
         "images": images,
         "masks": masks,
         "labels": np.asarray(labels, dtype=np.int64),
+        "patient_ids": patient_ids,
         "files": valid_files,
         "errors": errors
     }
